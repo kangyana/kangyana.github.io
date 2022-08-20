@@ -1,7 +1,6 @@
 const cacheName = "pwa-v1";
 
 const contentToCache = [
-  "/",
   "index.html",
   "app.js",
   "assets/favicon.ico",
