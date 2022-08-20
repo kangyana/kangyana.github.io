@@ -1,5 +1,7 @@
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
+  navigator.serviceWorker.register("service-worker.js").then(() => {
+    console.log("SW 注册");
+  });
 }
 
 // 推送消息
