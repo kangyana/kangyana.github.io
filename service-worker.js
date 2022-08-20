@@ -20,22 +20,26 @@ self.addEventListener("install", (e) => {
 
 // 拦截请求 加载与缓存
 self.addEventListener("fetch", (e) => {
+  // e.respondWith(
+  //   caches.match(e.request).then((r) => {
+  //     console.log(`SW 加载资源: ${e.request.url}`);
+  //     return (
+  //       r ||
+  //       fetch(e.request).then((response) => {
+  //         return caches.open(cacheName).then((cache) => {
+  //           console.log(`SW 缓存新资源: ${e.request.url}`);
+  //           if (e.request.url.startsWith("http")) {
+  //             cache.put(e.request, response.clone());
+  //           }
+  //           return response;
+  //         });
+  //       })
+  //     );
+  //   })
+  // );
+  console.log(`SW 加载资源: ${e.request.url}`);
   e.respondWith(
-    caches.match(e.request).then((r) => {
-      console.log(`SW 加载资源: ${e.request.url}`);
-      return (
-        r ||
-        fetch(e.request).then((response) => {
-          return caches.open(cacheName).then((cache) => {
-            console.log(`SW 缓存新资源: ${e.request.url}`);
-            if (e.request.url.startsWith("http")) {
-              cache.put(e.request, response.clone());
-            }
-            return response;
-          });
-        })
-      );
-    })
+    caches.match(e.request).then((response) => response || fetch(e.request))
   );
 });
 
